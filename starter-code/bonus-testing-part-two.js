@@ -21,15 +21,40 @@ var assert = require('./vendor/assert');
    figure out how many days it took before the lion decided to supplement his
    diet with the caretaker.
   */
+//Original Array = [5, 4, 3, 6, 2, 4, 3, 4, 5, 1]
 
 var mealsPerDay = [5, 4, 3, 6, 2, 4, 3, 4, 5, 1];
-var tooHungryDay;
+var tooHungryDay; // fail fail fail
+tooHungryDay = '3'; //fail pass pass
+tooHungryDay = 'three'; //fail fail fail
+tooHungryDay = '-1'; //fail pass fail
+tooHungryDay = -1; //pass pass fail
+tooHungryDay = 11; //pass fail pass
+tooHungryDay = 10; //pass pass pass
+tooHungryDay = ''; //fail pass fail
+
 
 function testIsNumber() {
   assert(
     typeof(tooHungryDay) === 'number',
     'The lion appears to be too hungry after ' + tooHungryDay + ' days...',
     'tooHungryDay should be a number but is instead a data type of ' + typeof tooHungryDay
+  );
+}
+
+function testProducesAnswer() {
+  assert(
+    tooHungryDay <= mealsPerDay.length,
+    'The day the tiger gets too hungry falls within the limits of the array',
+    'tooHungryDay does not occur within the limits of this array'
+  );
+}
+
+function testHasValidNumbers(){
+  assert(
+    tooHungryDay > 0,
+    'Day is greater than 0',
+    'Day is less than 0'
   );
 }
 
@@ -52,7 +77,18 @@ function testIsNumber() {
    When ready, execute this program in your terminal with node
    (node bonus-testing-part-two)  :-)
   */
-
-
-
+var sum = 0, avg, beenChanged = false;
+mealsPerDay.forEach(function(cur, idx, arr){
+  sum += cur; //add new value to sum total
+  avg = sum/(idx + 1); // divide sum by day of week to get average
+  if(avg < 4){ //if avg falls below 4
+    if (beenChanged === false){ //and its the first time to change tooHungryDay
+      tooHungryDay = idx + 1; //update tooHungryDay
+      beenChanged = true; // and set beenchanged to true
+    }
+  }
+});
+console.log(tooHungryDay, 'Is too hungry day');
 testIsNumber();
+testProducesAnswer();
+testHasValidNumbers();
