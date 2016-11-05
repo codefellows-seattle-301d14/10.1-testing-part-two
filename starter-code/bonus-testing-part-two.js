@@ -33,6 +33,15 @@ function testIsNumber() {
   );
 }
 
+//Assumption: humans count days based on initial index of 1.
+function testAcceptableNumDays(){
+  assert(
+    (tooHungryDay > 0 && tooHungryDay <= (mealsPerDay.length+1)),
+    'tooHungryDay is: ' + tooHungryDay + '. This is within the length of the data: ' + mealsPerDay.length + ' total days.',
+    'tooHungryDay is: ' + tooHungryDay + '. This is NOT within the length of the data: ' + mealsPerDay.length + ' total days.'
+  );
+}
+
   /* TODO:
      Write at least one more test function that calls assert to test
      whether tooHungryDay falls within an acceptable answer
@@ -40,6 +49,41 @@ function testIsNumber() {
 
   // Bonus! Can you think of other things to test for?
   // Repeat the process for additonal points!
+
+function findHungryDay(){
+  var runningAvg = 0, sum = 0;
+
+  for(i=0; i < mealsPerDay.length; i++){
+    sum += mealsPerDay[i];
+    runningAvg = sum / (i+1);
+    console.log('Day: ' + (i+1) + ', Average: ' + runningAvg);
+    if(runningAvg < 4) {
+      tooHungryDay = i + 1;
+      break;
+    }
+  }
+  console.log('The fateful day of hunger is: ' + tooHungryDay);
+}
+
+//Refactor findHungryDay with functional programming
+function findFunkyHungryDay() {
+  runningAvg = 0;
+  foundDay = false;
+  mealsPerDay.reduce(function(acc, cur, idx, array){
+    if (!foundDay){
+      runningAvg = (acc + cur)/(idx+1);
+      if(runningAvg < 4){
+        tooHungryDay = idx + 1;
+        foundDay = true;
+      }
+    }
+    console.log('Day: ' + (idx+1) + ', Average: ' + runningAvg);
+    return acc + cur;
+  });
+  console.log('The fateful day of hunger is: ' + tooHungryDay);
+}
+
+
 
 
   /* TODO:
@@ -54,5 +98,7 @@ function testIsNumber() {
   */
 
 
-
+findHungryDay();
+findFunkyHungryDay();
 testIsNumber();
+testAcceptableNumDays();
