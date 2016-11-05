@@ -28,7 +28,7 @@ var tooHungryDay;
 function testIsNumber() {
   assert(
     typeof(tooHungryDay) === 'number',
-    'The lion appears to be too hungry after ' + tooHungryDay + ' days...',
+    'The lion appears to be too hungry after ' + tooHungryDay + ' days...which is a number',
     'tooHungryDay should be a number but is instead a data type of ' + typeof tooHungryDay
   );
 }
@@ -71,9 +71,9 @@ function testIsInteger() {
 function findTooHungryDay() {
   mealsPerDay.reduce(function(acc, cur, idx, array) {
     if(!tooHungryDay) {
-      console.log('Day: ' + (idx + 1));
       acc = ((acc * idx) + cur) / (idx + 1);
-      console.log('Avg: ' + acc);
+      console.log('Day: ' + (idx + 1));
+      console.log('  Avg: ' + acc);
       if (acc < 4 && idx !== 0) {
         tooHungryDay = idx + 1;
         console.log('tooHungryDay is ' + tooHungryDay);
