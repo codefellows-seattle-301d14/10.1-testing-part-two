@@ -28,10 +28,13 @@ var tooHungryDay;
 function testIsNumber() {
   assert(
     typeof(tooHungryDay) === 'number',
+    //this should tell us it is a number...
     'The lion appears to be too hungry after ' + tooHungryDay + ' days...',
     'tooHungryDay should be a number but is instead a data type of ' + typeof tooHungryDay
   );
 }
+
+
 
   /* TODO:
      Write at least one more test function that calls assert to test
@@ -40,6 +43,12 @@ function testIsNumber() {
 
   // Bonus! Can you think of other things to test for?
   // Repeat the process for additonal points!
+
+function testIsReasonableNumber(){
+  assert(
+    tooHungryDay >0 && tooHungryDay < (mealsPerDay.length +1), 'Yeah its reasonable!','that number is cray'
+  );
+};
 
 
   /* TODO:
@@ -53,6 +62,18 @@ function testIsNumber() {
    (node bonus-testing-part-two)  :-)
   */
 
+function whenDoesHeDie(){
+  mealsPerDay.reduce(function(acc,elem,idx,array){
+    var dayAvg =(acc*idx+elem)/(idx+1);
+    if(dayAvg<4 && !(tooHungryDay)){
+      tooHungryDay = idx+1;
+    };
+    return dayAvg;
+  },0);
+};
 
+whenDoesHeDie();
 
 testIsNumber();
+
+testIsReasonableNumber();
