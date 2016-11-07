@@ -39,7 +39,7 @@ function testIsNumber() {
      based on the number of days available in the array. */
 function testTooHungryDay() {
   assert(
-    tooHungryDay > 0 && tooHungryDay < 4,
+    tooHungryDay > 0 && tooHungryDay < mealsPerDay.length,
     'tooHungryDay is ' + tooHungryDay + ', and appears to be valid, yay!',
     'tooHungryDay is ' + tooHungryDay + ', but appears to be invalid, boo!'
   );
@@ -67,7 +67,7 @@ function findTooHungryDay() {
       var place = idx + 1;
       var avg = acc / place;
       if (avg < 4) {
-        tooHungryDay = avg;
+        tooHungryDay = place;
         return findTooHungryDay;
       };
       return acc;
