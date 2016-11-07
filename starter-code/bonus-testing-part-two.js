@@ -61,18 +61,19 @@ function testTooHungryDay() {
    (node bonus-testing-part-two)  :-)
   */
 function findTooHungryDay() {
-  if (typeof tooHungryDay === 'undefined') {
-    mealsPerDay.reduce(function(acc, cur, idx) {
+  mealsPerDay.reduce(function(acc, cur, idx) {
+    if (typeof tooHungryDay === 'undefined') {
       acc += cur;
       var place = idx + 1;
       var avg = acc / place;
+      console.log(avg);
       if (avg < 4) {
         tooHungryDay = place;
         return findTooHungryDay;
       };
       return acc;
-    }, 0);
-  }
+    }
+  }, 0);
 };
 
 testIsNumber();
