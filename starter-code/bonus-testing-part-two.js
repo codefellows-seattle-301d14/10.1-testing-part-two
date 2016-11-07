@@ -37,6 +37,14 @@ function testIsNumber() {
      Write at least one more test function that calls assert to test
      whether tooHungryDay falls within an acceptable answer
      based on the number of days available in the array. */
+function testTooHungryDay() {
+  assert(
+    tooHungryDay > 0 && tooHungryDay < 4,
+    'tooHungryDay is ' + tooHungryDay + ', and appears to be valid, yay!',
+    'tooHungryDay is ' + tooHungryDay + ', but appears to be invalid, boo!'
+  );
+}
+
 
   // Bonus! Can you think of other things to test for?
   // Repeat the process for additonal points!
@@ -52,7 +60,21 @@ function testIsNumber() {
    When ready, execute this program in your terminal with node
    (node bonus-testing-part-two)  :-)
   */
-
-
+function findTooHungryDay() {
+  if (typeof tooHungryDay === 'undefined') {
+    mealsPerDay.reduce(function(acc, cur, idx) {
+      acc += cur;
+      var place = idx + 1;
+      var avg = acc / place;
+      if (avg < 4) {
+        tooHungryDay = avg;
+        return findTooHungryDay;
+      };
+      return acc;
+    }, 0);
+  }
+};
 
 testIsNumber();
+findTooHungryDay();
+testTooHungryDay();
