@@ -33,6 +33,13 @@ function testIsNumber() {
   );
 }
 
+function tooHungry() {
+  assert(
+    tooHungryDay > 0 && tooHungryDay <= mealsPerDay.length,
+    'It looks like the Lion went hungry on day ' + tooHungryDay,
+    'Day ' + tooHungryDay + ' is not in the mealsPerDay array'
+  );
+}
   /* TODO:
      Write at least one more test function that calls assert to test
      whether tooHungryDay falls within an acceptable answer
@@ -41,7 +48,18 @@ function testIsNumber() {
   // Bonus! Can you think of other things to test for?
   // Repeat the process for additonal points!
 
-
+function averageMealsPerDay() {
+  mealsPerDay.reduce(function(accumulator, currentDay, idx){
+    accumulator += currentDay;
+    var day = idx + 1;
+    var avg = accumulator / day;
+    if (avg < 4) {
+      tooHungryDay = day;
+      return averageMealsPerDay;
+    }
+    return accumulator;
+  }, 0);
+}
   /* TODO:
    Cycle through the days in mealsPerDay. Log the cumulative average
    meals/day the lion ate since the new caretaker started.
@@ -53,6 +71,6 @@ function testIsNumber() {
    (node bonus-testing-part-two)  :-)
   */
 
-
-
+averageMealsPerDay();
 testIsNumber();
+tooHungry();
