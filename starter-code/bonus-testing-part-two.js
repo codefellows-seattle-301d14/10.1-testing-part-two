@@ -41,18 +41,41 @@ function testIsNumber() {
   // Bonus! Can you think of other things to test for?
   // Repeat the process for additonal points!
 
+function testTooHungryDay() {
+  assert(
+    tooHungryDay < mealsPerDay.length,
+    'Pass',
+    'Fail'
+  );
+}
 
   /* TODO:
    Cycle through the days in mealsPerDay. Log the cumulative average
    meals/day the lion ate since the new caretaker started.
    tooHungryDay should be equal to the day the lion started
-   pondering protein supplements (the first day the average dips below 4
-   meals) Remember: humans count days starting at 1!
+   pondering protein supplements
+
+   (the first day the average dips below 4 meals)
+
+   Remember: humans count days starting at 1!
 
    When ready, execute this program in your terminal with node
    (node bonus-testing-part-two)  :-)
   */
 
+function checkDaysTillCareTakerEaten() {
+  var careTakerEaten = false;
+  var cumulativeAverage = mealsPerDay.reduce(function (prev, cur, idx, array) {
+    if (cur < 4 && !careTakerEaten) {
+      tooHungryDay = idx + 1;
+      careTakerEaten = true;
+    }
+    return prev + cur;
+  }, 0);
+  console.log(cumulativeAverage/mealsPerDay.length + ' Meals Per Day');
+}
 
 
+checkDaysTillCareTakerEaten();
 testIsNumber();
+testTooHungryDay();
